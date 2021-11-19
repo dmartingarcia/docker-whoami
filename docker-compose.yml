@@ -1,0 +1,16 @@
+version: "3.3"
+
+services:
+  whoami:
+    image: "traefik/whoami"
+    ports:
+      - 8888:80
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.${HTTP_HOST}`)"
+      - "traefik.http.routers.whoami.entrypoints=websecure"
+    networks:
+      - web
+networks:
+  web:
+    external: true
